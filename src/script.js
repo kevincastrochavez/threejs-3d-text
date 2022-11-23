@@ -1,6 +1,7 @@
 import './style.css';
 import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui';
 
@@ -24,19 +25,33 @@ const textureLoader = new THREE.TextureLoader();
 // FONTS
 
 const fontLoader = new FontLoader();
-const font = fontLoader.load('/fonts/helvetiker_regular.typeface.json', () => {
-  console.log('Loaded');
+fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
+  const textGeometry = new TextGeometry('Kevin Castro', {
+    font,
+    size: 0.5,
+    height: 0.2,
+    curveSegments: 5,
+    bevelEnabled: true,
+    bevelThickness: 0.03,
+    bevelSize: 0.02,
+    bevelOffset: 0,
+    bevelSegments: 4,
+  });
+
+  const textMaterial = new THREE.MeshBasicMaterial();
+  const text = new THREE.Mesh(textGeometry, textMaterial);
+  scene.add(text);
 });
 
 /**
  * Object
  */
-const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial()
-);
+// const cube = new THREE.Mesh(
+//   new THREE.BoxGeometry(1, 1, 1),
+//   new THREE.MeshBasicMaterial()
+// );
 
-scene.add(cube);
+// scene.add(cube);
 
 /**
  * Sizes
