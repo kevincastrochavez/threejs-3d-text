@@ -25,7 +25,7 @@ const scene = new THREE.Scene();
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
-const matcapTexture = textureLoader.load('/textures/matcaps/1.png');
+const matcapTexture = textureLoader.load('/textures/matcaps/8.png');
 
 // FONTS
 
@@ -43,8 +43,8 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
     bevelSegments: 4,
   });
 
-  const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
-  const text = new THREE.Mesh(textGeometry, textMaterial);
+  const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
+  const text = new THREE.Mesh(textGeometry, material);
   scene.add(text);
 
   //   textGeometry.computeBoundingBox();
@@ -58,12 +58,9 @@ fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
 
   //   Adding donuts to the scene
   const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 20, 45);
-  const donutMaterial = new THREE.MeshMatcapMaterial({
-    matcap: matcapTexture,
-  });
 
   for (let index = 0; index < 80; index++) {
-    const donut = new THREE.Mesh(donutGeometry, donutMaterial);
+    const donut = new THREE.Mesh(donutGeometry, material);
 
     donut.position.x = (Math.random() - 0.5) * 10;
     donut.position.y = (Math.random() - 0.5) * 10;
@@ -123,7 +120,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.x = 1;
 camera.position.y = 1;
-camera.position.z = 2;
+camera.position.z = 5;
 scene.add(camera);
 
 // Controls
